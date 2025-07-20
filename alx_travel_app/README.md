@@ -15,3 +15,4 @@ alx_travel_app_0x00/
 │ └── management/commands/seed.py
 ├── manage.py
 └── README.md
+
