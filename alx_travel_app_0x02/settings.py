@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
-import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,8 +18,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Initialize environment variables
 # Ensure you have a .env file in the BASE_DIR with the necessary variables
-env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -61,7 +58,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'alx_travel_app.urls'
+ROOT_URLCONF = 'alx_travel_app_0x02.urls'
 
 TEMPLATES = [
     {
@@ -78,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
+WSGI_APPLICATION = 'alx_travel_app_0x02.wsgi.application'
 
 
 # Database
@@ -87,11 +84,11 @@ WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('alx_travel_db'),
-        'USER': env('root'),
-        'PASSWORD': env('Donoye12'),
-        'HOST': env('127.0.0.1'),
-        'PORT': env('3306'),
+        'NAME':     config('DB_NAME',     default='alx_travel_db'),
+        'USER':     config('DB_USER',     default='root'),
+        'PASSWORD': config('DB_PASSWORD', default='Donoye12'),
+        'HOST':     config('DB_HOST',     default='127.0.0.1'),
+        'PORT':     config('DB_PORT',     default='3306'),
     }
 }
 
@@ -136,3 +133,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CHAPA_SECRET_KEY = config('CHAPA_SECRET_KEY')
